@@ -1,28 +1,24 @@
 // utils.js负责前后端通信： (暂时用proxy) 
 // 生成url
 
-//const domain = "https://sound-fastness-362223.uk.r.appspot.com";
 const domain = "";
 
-// credentials = {susername: string, password: string}
-// asHost: boolean (host, guest)
+
 export const login = (credential, asHost) => { 
-  const loginUrl = `${domain}/authenticate/${asHost ? "host" : "guest"}`; // 组装 url
-  // 配置。fetch：发送请求到第一个参数
+  const loginUrl = `${domain}/authenticate/${asHost ? "host" : "guest"}`; 
   return fetch(loginUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json", // 所有header都用默认，只有这个要用json进行解析
+      "Content-Type": "application/json", 
     },
-    body: JSON.stringify(credential), // 把数据拍扁。和上一句配套
-  }).then((response) => {  // 上面函数请求成功时运行then之后的内容
+    body: JSON.stringify(credential), 
+  }).then((response) => { 
     if (response.status !== 200) {
         throw Error("Fail to log in");
     }
  
-    // 请求从后端回来时进行return。解析json。
-    // 一路ruturn给login函数，作为state返回给ui层
-    return response.json(); // 不是所有都要对数据进行解析
+    
+    return response.json(); 
   });
 };
  
@@ -40,7 +36,8 @@ export const register = (credential, asHost) => {
     }
   });
 };
- 
+
+//////////////////////////////////////////////////// 
 // 拉取guest的reservation（没有参数，因为只有guest才需要看reservation，不需要区分）
 export const getReservations = () => {
   // 拿token， 放在header上
@@ -50,7 +47,7 @@ export const getReservations = () => {
  
   return fetch(listReservationsUrl, {
     headers: {
-      Authorization: `Bearer ${authToken}`, // 固定写法
+      Authorization: `Bearer ${authToken}`, 
     },
   }).then((response) => {
     if (response.status !== 200) {
