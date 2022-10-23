@@ -3,6 +3,8 @@ import { UserOutlined } from "@ant-design/icons";
 import React from "react";
 import LoginPage from "./components/LoginPage";
 import { Footer } from "antd/lib/layout/layout";
+import HostHomePage from "./components/GuestHomePage";
+import GuestHomePage from "./components/GuestHomePage";
  
 const { Header, Content } = Layout;
  
@@ -39,15 +41,15 @@ class App extends React.Component {
   };
  
   renderContent = () => {
-    if (!this.state.authed) {
-      return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
-    }
+    // if (!this.state.authed) {
+    //   return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
+    // }
  
-    if (this.state.asHost) {
-      return <div>employee home page</div>;
-    }
+    // if (this.state.asHost) {
+    //   return <div>employee home page</div>;
+    // }
  
-    return <div>guest home page</div>;
+    return <GuestHomePage/>;
   };
  
   userMenu = (
