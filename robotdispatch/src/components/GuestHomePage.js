@@ -316,17 +316,59 @@ class CancelReservationButton extends React.Component {
 
 class GuestHomePage extends React.Component {
   render() {
-    return (
-      <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
-        <TabPane tab="Search Stays" key="1">
-          <SearchStays />
-        </TabPane>
-        <TabPane tab="My Shipment" key="2">
-          <MyReservations />
-        </TabPane>
-      </Tabs>
-    );
-  }
+        return (
+            <Tabs>
+                <TabPane tab="Create Shipment" key="1">
+                    <CreateShipment />
+                </TabPane>
+                <TabPane tab="My Shipment" key="2">
+                    <MyShipment />
+                </TabPane>
+            </Tabs>
+        );
+    }
+}
+
+class CreateShipment extends React.Component {
+    state = {
+        data: [],
+        loading: false,
+    };
+
+    render() {
+        return (
+            <>
+                <Form layout="Horizontal">
+                    <Form.Item label="From" name="from_address" rules={[{ required: true }]}>
+                        
+                    </Form.Item>
+                    <Form.Item label="To" name="to_address" rules={[{ required: true }]}>
+                        
+                    </Form.Item>
+                    <Form.Item label="Shipping Vehicle" name="shipping_vehicle">
+                        <Select>
+                            <Select.Option value="autobot_1">Autobot 1</Select.Option>
+                            <Select.Option value="autobot_2">Autobot 2</Select.Option>
+                            <Select.Option value="drone_1">Drone 1</Select.Option>
+                            <Select.Option value="drone_2">Drone 2</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item label="Weight" name="shipping_weight" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Pick Up Date" name="pick_up_date" rules={[{ required: true }]}>
+                        <DatePicker />
+                    </Form.Item>
+                    <Form.Item label="Package Description" name="package_description">
+                        <TextArea rows={4} />
+                    </Form.Item>
+                    <Form.Item label="Create Shipment">
+                        <Button loading={this.state.loading} type="primary" htmlType="submit">Ship</Button>
+                    </Form.Item>
+                </Form>
+            </>
+        )
+    }
 }
  
 export default GuestHomePage;
