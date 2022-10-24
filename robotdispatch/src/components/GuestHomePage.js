@@ -339,6 +339,9 @@ class CreateShipment extends React.Component {
         return (
             <>
                 <Form layout="Horizontal">
+                    <Form.Item label="Name" name="name" rules={[{ required: true }]}>
+                        
+                    </Form.Item>
                     <Form.Item label="From" name="from_address" rules={[{ required: true }]}>
                         
                     </Form.Item>
