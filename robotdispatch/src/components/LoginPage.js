@@ -7,7 +7,7 @@ class LoginPage extends React.Component {
   formRef = React.createRef();
 
   state = {
-    asHost: false,
+    asAdmin: false,
     loading: false,
   };
  
@@ -29,9 +29,9 @@ class LoginPage extends React.Component {
     });
  
     try { // call api
-      const { asHost } = this.state;
-      const resp = await login(formInstance.getFieldsValue(true), asHost); 
-      this.props.handleLoginSuccess(resp.token, asHost); 
+      const { asAdmin } = this.state;
+      const resp = await login(formInstance.getFieldsValue(true), asAdmin); 
+      this.props.handleLoginSuccess(resp.token, asAdmin); 
     } catch (error) {
       message.error(error.message);
     } finally {
@@ -55,7 +55,7 @@ class LoginPage extends React.Component {
     });
  
     try {
-      await register(formInstance.getFieldsValue(true), this.state.asHost);
+      await register(formInstance.getFieldsValue(true), this.state.asAdmin);
       message.success("Register Successfully");
     } catch (error) {
       message.error(error.message);
@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
  
   handleCheckboxOnChange = (e) => {
     this.setState({
-      asHost: e.target.checked,
+      asAdmin: e.target.checked,
     });
   };
  
@@ -120,7 +120,7 @@ class LoginPage extends React.Component {
               left: '17%'}}> 
           <Checkbox
             disabled={this.state.loading}
-            checked={this.state.asHost}
+            checked={this.state.asAdmin}
             onChange={this.handleCheckboxOnChange} // 被勾选或者取消勾选后执行
           >
             As Admin

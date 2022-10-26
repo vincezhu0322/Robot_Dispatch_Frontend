@@ -4,8 +4,8 @@
 const domain = "";
 
 
-export const login = (credential, asHost) => { 
-  const loginUrl = `${domain}/authenticate/${asHost ? "host" : "guest"}`; 
+export const login = (credential, asAdmin) => { 
+  const loginUrl = `${domain}/authenticate/${asAdmin ? "admin" : "guest"}`; 
   return fetch(loginUrl, {
     method: "POST",
     headers: {
@@ -22,8 +22,8 @@ export const login = (credential, asHost) => {
   });
 };
  
-export const register = (credential, asHost) => {
-  const registerUrl = `${domain}/register/${asHost ? "host" : "guest"}`; // 和上面唯一的区别
+export const register = (credential, asAdmin) => {
+  const registerUrl = `${domain}/register/${asAdmin ? "admin" : "guest"}`; // 和上面唯一的区别
   return fetch(registerUrl, {
     method: "POST",
     headers: {
@@ -175,3 +175,48 @@ export const uploadStay = (data) => {
   });
 };
 
+
+/**
+ * function to call search_vehicles API
+ * @param {*} query 
+ * @returns 
+ */
+
+export const searchVehicles = (query) => {
+  const authToken = localStorage.getItem("authToken");
+  const searchStaysUrl = new URL(`${domain}/vehicles/`);
+  searchStaysUrl.searchParams.append("id", query.id);
+  searchStaysUrl.searchParams.append("name", query.name);
+  searchStaysUrl.searchParams.append("status", query.status);
+  searchStaysUrl.searchParams.append("vehicle_type", query.vehicle_type);
+
+  return fetch(searchStaysUrl, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("Fail to search vehicles");
+    }
+ 
+    return response.json();
+  });
+};
+
+// function to call addVehicle API
+export const addNewVehicle = (data) => {
+  const authToken = localStorage.getItem("authToken");
+  const uploadStayUrl = `${domain}/vehicles`;
+ 
+  return fetch(uploadStayUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: data,
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("Fail to add new vehicle");
+    }
+  });
+};

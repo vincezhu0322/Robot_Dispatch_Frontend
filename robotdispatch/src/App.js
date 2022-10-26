@@ -3,7 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import React from "react";
 import LoginPage from "./components/LoginPage";
 import { Footer } from "antd/lib/layout/layout";
-import HostHomePage from "./components/GuestHomePage";
+import AdminHomePage from "./components/AdminHomePage";
 import GuestHomePage from "./components/GuestHomePage";
  
 const { Header, Content } = Layout;
@@ -41,14 +41,13 @@ class App extends React.Component {
   };
  
   renderContent = () => {
-    // if (!this.state.authed) {
-    //   return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
-    // }
+    if (!this.state.authed) {
+      return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
+    }
  
-    // if (this.state.asHost) {
-    //   return <div>employee home page</div>;
-    // }
- 
+    if (this.state.asHost) {
+      return <AdminHomePage/>;
+    }
     return <GuestHomePage/>;
   };
  
@@ -59,7 +58,6 @@ class App extends React.Component {
       </Menu.Item>
     </Menu>
   );
- 
   render() {
     return (
       <Layout style={{ height: "100vh" }}>
@@ -80,7 +78,7 @@ class App extends React.Component {
         >
           {this.renderContent()}
         </Content>
-        
+
       </Layout>
     );
   }
