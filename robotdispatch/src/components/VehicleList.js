@@ -1,15 +1,23 @@
 import React from "react";
-import {List, Card} from "antd";
+import Text from "antd/lib/typography/Text";
+import { List, Card, Divider, message, Button } from "antd";
+import { DeleteOutlined} from '@ant-design/icons';
+import VehicleDetailInfoButton from "./VehicleDetailInfoButton";
+import { deleteVehicle } from "../utils";
 
 class VehicleList extends React.Component {
-    state = {
-        data: [],
-        loading: false,
-      };
+  state = {
+    loading: false,
+  };
+
+  onChange = () => {};
+
+  addOrRemove = () => {};
 
   render() {
-    return(   
-    <List
+    const { VehicleList } = this.props;
+    return (
+      <List
         style={{ marginTop: 20 }}
         loading={this.state.loading}
         grid={{
@@ -21,13 +29,72 @@ class VehicleList extends React.Component {
           xl: 4,
           xxl: 4,
         }}
-        dataSource={this.state.data}
+        dataSource={VehicleList}
         renderItem={(item) => (
           <List.Item>
-            <Card key={item.name}></Card>
+            <Card
+              key={item.id}
+              title={
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Text ellipsis={true} style={{ maxWidth: 150 }}>
+                    Vehicle: {item.name}
+                  </Text>
+                  <VehicleDetailInfoButton vehicle={item} />
+                </div>
+              }
+              extra={[<RemoveVehicleButton vehicle={item} />]}
+            >
+              <Text>ID: {item.id}</Text>
+              <Divider />
+              <Text>Status: {item.status}</Text>
+            </Card>
           </List.Item>
         )}
-      />);
+      />
+    );
   }
 }
+
 export default VehicleList;
+
+class RemoveVehicleButton extends React.Component {
+  state = {
+    loading: false,
+  };
+
+  handleRemoveStay = async () => {
+    const { vehicle } = this.props;
+    this.setState({
+      loading: true,
+    });
+
+    try {
+      await deleteVehicle(vehicle.id);
+      message.success("Vehicle successfully deleted!");
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  };
+
+  render() {
+    return (
+      <Button
+        loading={this.state.loading}
+        onClick={this.handleRemoveStay}
+        danger={true}
+        shape="round"
+        type="primary"
+        style={{
+          background: "#53078a",
+          borderColor: "purple",
+          fontFamily: "Verdana",
+        }}
+        icon={<DeleteOutlined />}
+      />
+    );
+  }
+}

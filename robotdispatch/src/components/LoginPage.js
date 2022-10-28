@@ -144,7 +144,7 @@ class LoginPage extends React.Component {
         </Space>
       </div>
     );
-   }
+   };
 }
  
 export default LoginPage;
