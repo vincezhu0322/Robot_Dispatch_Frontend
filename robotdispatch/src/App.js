@@ -41,13 +41,19 @@ class App extends React.Component {
   };
  
   renderContent = () => {
-    // if (!this.state.authed) {
-    //   return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
-    // }
+    if (!this.state.authed) {
+      return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
+    }
  
+<<<<<<< HEAD
     // if (this.state.asHost) {
     //  return <AdminHomePage/>;
     // }
+=======
+    if (this.state.asHost) {
+      return <AdminHomePage/>;
+    }
+>>>>>>> 2e974d40e0b12c56e348dfcda1badf5fbb29655d
     return <GuestHomePage/>;
   };
  
