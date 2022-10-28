@@ -46,9 +46,9 @@ class App extends React.Component {
     // }
  
     // if (this.state.asHost) {
-      return <AdminHomePage/>;
+    //  return <AdminHomePage/>;
     // }
-    //return <GuestHomePage/>;
+    return <GuestHomePage/>;
   };
  
   userMenu = (
