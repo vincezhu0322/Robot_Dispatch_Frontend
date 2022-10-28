@@ -355,6 +355,7 @@ class CreateShipment extends React.Component {
    //                  </Form.Item>
    //                  <Form.Item label="Pick Up Date" name="pick_up_date" rules={[{ required: true }]}>
    //                      <DatePicker />
+   
    //                  </Form.Item>
    //                  <Form.Item label="Package Description" name="package_description">
    //                      <TextArea rows={4} />
