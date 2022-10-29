@@ -5,11 +5,16 @@ import LoginPage from "./components/LoginPage";
 import { Footer } from "antd/lib/layout/layout";
 import AdminHomePage from "./components/AdminHomePage";
 import GuestHomePage from "./components/GuestHomePage";
+import { MainPage } from "./components/MainPage";
+
+
+
  
 const { Header, Content } = Layout;
  
 class App extends React.Component {
   state = {
+    gotoLog: false,
     authed: false,
     asHost: false,
   };
@@ -32,15 +37,25 @@ class App extends React.Component {
     });
   };
  
+  handleToLogIn = (token) => {
+    localStorage.setItem("gotoLog", token);
+    this.setState({
+      gotoLog: true
+    });
+  };
   handleLogOut = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("asHost");
+    localStorage.removeItem("gotoLog");
     this.setState({
       authed: false,
     });
   };
  
   renderContent = () => {
+    if (!this.state.gotoLog) {
+      return <MainPage handleToLogIn={this.handleToLogIn}/>;
+    }
     if (!this.state.authed) {
       return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
     }
