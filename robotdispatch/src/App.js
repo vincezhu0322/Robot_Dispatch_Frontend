@@ -5,7 +5,7 @@ import LoginPage from "./components/LoginPage";
 import { Footer } from "antd/lib/layout/layout";
 import AdminHomePage from "./components/AdminHomePage";
 import GuestHomePage from "./components/GuestHomePage";
-import { MainPage } from "./components/MainPage";
+import { HomePage } from "./components/HomePage";
 
 
 
@@ -54,7 +54,7 @@ class App extends React.Component {
  
   renderContent = () => {
     if (!this.state.gotoLog) {
-      return <MainPage handleToLogIn={this.handleToLogIn}/>;
+      return <HomePage handleToLogIn={this.handleToLogIn}/>;
     }
     if (!this.state.authed) {
       return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;

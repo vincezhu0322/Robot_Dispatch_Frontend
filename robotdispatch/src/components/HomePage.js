@@ -1,14 +1,9 @@
 import React from "react";
 import { Button, Space } from "antd";
-import LoginPage from "./LoginPage";
-import { useNavigate } from "react-router-dom";
-import { Content } from "antd/lib/layout/layout";
-import { login } from "../utils";
-import App from "../App";
-import ReactDOM from 'react-dom/client';
 
 
-class MainPage extends React.Component {
+
+class HomePage extends React.Component {
     state = {
         loading: false,
       };
@@ -53,4 +48,4 @@ class MainPage extends React.Component {
       );
      };
 }
-export{ MainPage };
+export{ HomePage };
