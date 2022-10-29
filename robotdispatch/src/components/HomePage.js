@@ -29,6 +29,7 @@ class HomePage extends React.Component {
         <li>Schedule pickups easily</li>
         <li>Quickly find and track previous shipments</li>
         <li>Create shipments online</li>
+        <li>Choose the robot you want!</li>
         </ul>
 
               
