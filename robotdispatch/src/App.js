@@ -45,15 +45,14 @@ class App extends React.Component {
       return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
     }
  
-<<<<<<< HEAD
-    // if (this.state.asHost) {
-    //  return <AdminHomePage/>;
-    // }
-=======
     if (this.state.asHost) {
       return <AdminHomePage/>;
     }
->>>>>>> 2e974d40e0b12c56e348dfcda1badf5fbb29655d
+
+    if (this.state.asHost) {
+      return <AdminHomePage/>;
+    }
+
     return <GuestHomePage/>;
   };
  
