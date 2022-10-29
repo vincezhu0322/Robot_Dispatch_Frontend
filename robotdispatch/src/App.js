@@ -49,10 +49,6 @@ class App extends React.Component {
       return <AdminHomePage/>;
     }
 
-    if (this.state.asHost) {
-      return <AdminHomePage/>;
-    }
-
     return <GuestHomePage/>;
   };
  
