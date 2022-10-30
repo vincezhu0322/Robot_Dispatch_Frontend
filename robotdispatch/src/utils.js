@@ -243,3 +243,35 @@ export const deleteVehicle = (vehicleId) => {
     }
   });
 };
+
+export const getDelivery = (fo, start_date, end_date) => {
+  const authToken = localStorage.getItem("authToken");
+  const getDeliveryUrl = `${domain}/deliveries/${fo}_${start_date}_${end_date}`;
+
+  return fetch(getDeliveryUrl, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("Fail to search delivery");
+    }
+    return response.json();
+  });
+};
+
+export const deleteDelivery = (deliveryId) => {
+  const authToken = localStorage.getItem("authToken");
+  const deleteDeliveryUrl = `${domain}/deliveries/${deliveryId}`;
+
+  return fetch(deleteDeliveryUrl, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("Fail to delete delivery");
+    }
+  });
+};
