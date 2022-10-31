@@ -3,6 +3,7 @@ import { Tabs } from "antd";
 
 import VehicleManagement from "./VehicleManagement";
 import DeliveryManagement from "./DeliveryManagement";
+import CompanyNews from "./CompanyNews";
 
 const { TabPane } = Tabs;
 
@@ -11,9 +12,9 @@ class AdminHomePage extends React.Component {
     return (
       <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
         <TabPane tab="Company News" key="1">
-        Company News
+          <CompanyNews />
         </TabPane>
-        <TabPane tab="Delivery Management" key="2"> 
+        <TabPane tab="Delivery Management" key="2">
           <DeliveryManagement />
         </TabPane>
         <TabPane tab="Vehicle Management" key="3">
