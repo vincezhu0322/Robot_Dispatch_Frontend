@@ -1,58 +1,74 @@
-import React from "react";
-import {
-    Form,
-    DatePicker,
-    Button,
-    Select,
-    Input
-  } from "antd";
-
+import { render } from '@testing-library/react';
+import { 
+  Button, 
+  message, 
+  Steps,
+  Input,
+} from 'antd';
+import React, { useState } from 'react';
+import AddressPage from './AddressPage';
+const { Step } = Steps;
 const { TextArea } = Input;
+const steps = [
+  {
+    title: 'Address',
+    content: <AddressPage />,
+  },
+  {
+    title: 'Vehicle',
+    content: 'Vehicle Selection',
+  },
+  {
+    title: 'Estimation',
+    content: 'Left is image and info (vehicle type, weight, dimension, pickup time, address), Right is Map from backend',
+  },
+  {
+    title: 'Confirmation',
+    content: 'Similar to Estimation, (plus tracking number and id). Need more discussion with backend',
+  }
+];
 
-class CreateShipment extends React.Component {
-    state = {
-        data: [],
-        loading: false,
-    };
+const CreateShipment = () => {
+  const [current, setCurrent] = useState(0);
+  const next = () => {
+    setCurrent(current + 1);
+  };
+  const prev = () => {
+    setCurrent(current - 1);
+  };
+  return (
+    <>
+      <Steps current={current}>
+        {steps.map((item) => (
+          <Step key={item.title} title={item.title} />
+        ))}
+      </Steps>
+      <div className="steps-content">{steps[current].content}</div>
+      <div className="steps-action">
+        {current > 0 && (
+          <Button
+            style={{
+              margin: '0 8px',
+            }}
+            onClick={() => prev()}
+          >
+            Previous
+          </Button>
+        )}
+        {current < steps.length - 1 && (
+          <Button type="primary" onClick={() => next()}>
+            Next
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button type="primary" onClick={() => message.success('Processing complete!')}>
+            Ship
+          </Button>
+        )}
+        
+      </div>
+    </>
+  );
+};
 
-    render() {
-        return (
-            <>
-                <Form layout="Horizontal">
-                    <Form.Item label="Name" name="name" rules={[{ required: true }]}>
-                        
-                    </Form.Item>
-                    <Form.Item label="From" name="from_address" rules={[{ required: true }]}>
-                        
-                    </Form.Item>
-                    <Form.Item label="To" name="to_address" rules={[{ required: true }]}>
-                        
-                    </Form.Item>
-                    <Form.Item label="Shipping Vehicle" name="shipping_vehicle">
-                        <Select>
-                            <Select.Option value="autobot_1">Autobot 1</Select.Option>
-                            <Select.Option value="autobot_2">Autobot 2</Select.Option>
-                            <Select.Option value="drone_1">Drone 1</Select.Option>
-                            <Select.Option value="drone_2">Drone 2</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item label="Weight" name="shipping_weight" rules={[{ required: true }]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Pick Up Date" name="pick_up_date" rules={[{ required: true }]}>
-                        <DatePicker />
-   
-                    </Form.Item>
-                    <Form.Item label="Package Description" name="package_description">
-                        <TextArea rows={4} />
-                    </Form.Item>
-                    <Form.Item label="Create Shipment">
-                        <Button loading={this.state.loading} type="primary" htmlType="submit">Ship</Button>
-                    </Form.Item>
-                </Form>
-            </>
-        )
-    }
-}
-
-export { CreateShipment };
+export default CreateShipment;
