@@ -1,7 +1,7 @@
 import React from "react";
 import Text from "antd/lib/typography/Text";
-import { List, Card, Divider, message, Button } from "antd";
-import { DeleteOutlined} from '@ant-design/icons';
+import { List, Card, Divider, message, Button, Space } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import VehicleDetailInfoButton from "./VehicleDetailInfoButton";
 import { deleteVehicle } from "../utils";
 
@@ -15,10 +15,10 @@ class VehicleList extends React.Component {
   addOrRemove = () => {};
 
   render() {
-    const { VehicleList, searchFunc } = this.props;
+    const { VehicleList, onRemoveSuccess } = this.props;
     return (
       <List
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 0 }}
         loading={this.state.loading}
         grid={{
           gutter: 16,
@@ -37,16 +37,23 @@ class VehicleList extends React.Component {
               title={
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Text ellipsis={true} style={{ maxWidth: 150 }}>
-                    Vehicle: {item.name}
+                    No. {item.id}
                   </Text>
-                  <VehicleDetailInfoButton vehicle={item} />
                 </div>
               }
-              extra={[<RemoveVehicleButton vehicle={item} onRemoveSuccess = {searchFunc}/>]}
+              extra={[
+                <VehicleDetailInfoButton vehicle={item} />,
+                <RemoveVehicleButton
+                  vehicle={item}
+                  onRemoveSuccess={onRemoveSuccess}
+                />,
+              ]}
             >
-              <Text>ID: {item.id}</Text>
+              <Text strong={true}>Name: </Text>
+              <Text type="secondary">{item.name}</Text>
               <Divider />
-              <Text>Status: {item.status}</Text>
+              <Text strong={true}>Status: </Text>
+              <Text type="secondary">{item.status}</Text>
             </Card>
           </List.Item>
         )}
@@ -63,7 +70,7 @@ class RemoveVehicleButton extends React.Component {
   };
 
   handleRemoveVehicle = async () => {
-    const { vehicle , onRemoveSuccess } = this.props;
+    const { vehicle, onRemoveSuccess } = this.props;
     this.setState({
       loading: true,
     });
@@ -71,7 +78,7 @@ class RemoveVehicleButton extends React.Component {
     try {
       await deleteVehicle(vehicle.id);
       message.success("Vehicle successfully deleted!");
-      onRemoveSuccess();
+      onRemoveSuccess(vehicle.id);
     } catch (error) {
       message.error(error.message);
     } finally {

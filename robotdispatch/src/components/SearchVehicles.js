@@ -1,10 +1,13 @@
 import React from "react";
-import { Form, InputNumber, Button, Radio } from "antd";
+import { Form, Input, Button, Select } from "antd";
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
+
+
+const { Option } = Select;
 
 class SearchVehicles extends React.Component {
   state = {
@@ -21,7 +24,7 @@ class SearchVehicles extends React.Component {
           style={{ maxWidth: 1000, margin: "auto" }}
         >
           <Form.Item label="Vehicle ID" name="id" rules={[{ required: true }]}>
-            <InputNumber />
+            <Input placeholder="Eneter Vehicle ID" style={{ width: 180 }} />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button
@@ -29,6 +32,7 @@ class SearchVehicles extends React.Component {
                 background: "#53078a",
                 borderColor: "purple",
                 fontFamily: "Verdana",
+                width: 180,
               }}
               htmlType="submit"
               loading={this.state.loading}
@@ -49,11 +53,14 @@ class SearchVehicles extends React.Component {
             name="center_id"
             rules={[{ required: true }]}
           >
-            <Radio.Group>
-              <Radio.Button value="1">Center 1</Radio.Button>
-              <Radio.Button value="2">Center 2</Radio.Button>
-              <Radio.Button value="3">Center 3</Radio.Button>
-            </Radio.Group>
+            <Select
+              defaultValue="Select Center"
+              style={{ width: 180 }}
+            >
+              <Option value="1">Center 1</Option>
+              <Option value="2">Center 2</Option>
+              <Option value="3">Center 3</Option>
+            </Select>
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button
@@ -61,6 +68,7 @@ class SearchVehicles extends React.Component {
                 background: "#53078a",
                 borderColor: "purple",
                 fontFamily: "Verdana",
+                width: 180,
               }}
               htmlType="submit"
               loading={this.state.loading}

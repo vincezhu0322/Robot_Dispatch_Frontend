@@ -9,7 +9,28 @@ class VehicleManagement extends React.Component {
   state = {
     vehicleList: [],
     isLoadingList: false,
-    searchFunc: undefined,
+  };
+
+  addVehicle = (vehicle) => {
+    let newVehicleList = [...this.state.vehicleList];
+    newVehicleList.push(vehicle);
+    this.setState (  {
+      vehicleList: newVehicleList,
+    })
+  };
+
+  removeVehicle = (id) => {
+    let newVehicleList = [...this.state.vehicleList];
+    if (newVehicleList == null) return;
+    for (let i = 0; i < newVehicleList.length; i++) {
+      if (newVehicleList[i].id !== id) continue;
+      newVehicleList.pop(i);
+      break;
+    }
+
+    this.setState({
+      vehicleList: newVehicleList,
+    });
   };
 
   searchById = async (values) => {
@@ -62,7 +83,7 @@ class VehicleManagement extends React.Component {
       <Row>
         <Divider orientation="right" plain></Divider>
         <Col span={8}>
-          <AddVehicle />
+          <AddVehicle onAddSuccess={this.addVehicle} />
           <Divider />
           <SearchVehicles
             searchByCenter={this.searchByCenter}
@@ -70,8 +91,10 @@ class VehicleManagement extends React.Component {
           />
         </Col>
         <Col span={16}>
-          <VehicleList VehicleList={this.state.vehicleList}
-          searchFunc = {this.state.searchFunc} />
+          <VehicleList
+            VehicleList={this.state.vehicleList}
+            onRemoveSuccess={this.removeVehicle}
+          />
         </Col>
       </Row>
     );

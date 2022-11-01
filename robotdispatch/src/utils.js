@@ -224,6 +224,7 @@ export const addNewVehicle = (data) => {
     if (response.status !== 200) {
       throw Error("Fail to add new vehicle");
     }
+    return response.json();
   });
 };
 
