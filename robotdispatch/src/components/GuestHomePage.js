@@ -19,7 +19,7 @@ class GuestHomePage extends React.Component {
         return (
          <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
          <TabPane tab="CreateShipment" key="1">
-           CreateShipment
+           <CreateShipment/>
          </TabPane>
          <TabPane tab="My Reservations" key="2">
            <MyShipments />
@@ -28,6 +28,5 @@ class GuestHomePage extends React.Component {
         );
     }
 }
-
  
 export default GuestHomePage;
