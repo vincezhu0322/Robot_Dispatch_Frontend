@@ -15,7 +15,7 @@ class VehicleList extends React.Component {
   addOrRemove = () => {};
 
   render() {
-    const { VehicleList } = this.props;
+    const { VehicleList, searchFunc } = this.props;
     return (
       <List
         style={{ marginTop: 20 }}
@@ -42,7 +42,7 @@ class VehicleList extends React.Component {
                   <VehicleDetailInfoButton vehicle={item} />
                 </div>
               }
-              extra={[<RemoveVehicleButton vehicle={item} />]}
+              extra={[<RemoveVehicleButton vehicle={item} onRemoveSuccess = {searchFunc}/>]}
             >
               <Text>ID: {item.id}</Text>
               <Divider />
@@ -62,8 +62,8 @@ class RemoveVehicleButton extends React.Component {
     loading: false,
   };
 
-  handleRemoveStay = async () => {
-    const { vehicle } = this.props;
+  handleRemoveVehicle = async () => {
+    const { vehicle , onRemoveSuccess } = this.props;
     this.setState({
       loading: true,
     });
@@ -71,6 +71,7 @@ class RemoveVehicleButton extends React.Component {
     try {
       await deleteVehicle(vehicle.id);
       message.success("Vehicle successfully deleted!");
+      onRemoveSuccess();
     } catch (error) {
       message.error(error.message);
     } finally {
@@ -84,7 +85,7 @@ class RemoveVehicleButton extends React.Component {
     return (
       <Button
         loading={this.state.loading}
-        onClick={this.handleRemoveStay}
+        onClick={this.handleRemoveVehicle}
         danger={true}
         shape="round"
         type="primary"

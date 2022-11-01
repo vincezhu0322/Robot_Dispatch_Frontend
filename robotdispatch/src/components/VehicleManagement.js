@@ -9,6 +9,7 @@ class VehicleManagement extends React.Component {
   state = {
     vehicleList: [],
     isLoadingList: false,
+    searchFunc: undefined,
   };
 
   searchById = async (values) => {
@@ -21,6 +22,7 @@ class VehicleManagement extends React.Component {
       const resp = await getVehicleById(id);
       this.setState({
         vehicleList: resp,
+        searchFunc: this.searchById,
       });
       message.success("search success");
     } catch (error) {
@@ -43,6 +45,7 @@ class VehicleManagement extends React.Component {
       const resp = await listVehicleByCenter(center_id);
       this.setState({
         vehicleList: resp,
+        searchFunc: this.searchByCenter,
       });
       message.success("search success");
     } catch (error) {
@@ -67,7 +70,8 @@ class VehicleManagement extends React.Component {
           />
         </Col>
         <Col span={16}>
-          <VehicleList VehicleList={this.state.vehicleList} />
+          <VehicleList VehicleList={this.state.vehicleList}
+          searchFunc = {this.state.searchFunc} />
         </Col>
       </Row>
     );
