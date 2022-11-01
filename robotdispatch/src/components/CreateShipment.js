@@ -71,4 +71,4 @@ const CreateShipment = () => {
   );
 };
 
-export default CreateShipment;
+export {CreateShipment};
