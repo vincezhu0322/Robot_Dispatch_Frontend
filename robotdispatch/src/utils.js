@@ -37,7 +37,7 @@ export const register = (credential, asAdmin) => {
 
 export const getShipments = () => {
   const authToken = localStorage.getItem("authToken");
-  const listReservationsUrl = `${domain}/shipments`;
+  const listReservationsUrl = `${domain}/deliveries?guest=`;
 
   return fetch(listReservationsUrl, {
     headers: {
