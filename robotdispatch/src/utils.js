@@ -126,7 +126,7 @@ export const bookStay = (data) => {
 
 export const cancelReservation = (shipmentId) => {
   const authToken = localStorage.getItem("authToken");
-  const cancelReservationUrl = `${domain}/shipments/${shipmentId}`;
+  const cancelReservationUrl = `${domain}/deliveries/${shipmentId}`;
 
   return fetch(cancelReservationUrl, {
     method: "DELETE",
