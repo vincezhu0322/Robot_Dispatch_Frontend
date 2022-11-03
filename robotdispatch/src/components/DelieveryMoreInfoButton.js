@@ -69,8 +69,8 @@ class DelieveryMoreinfoButton extends React.Component {
               <Text type="secondary">{order.guest.Id}</Text>
               <Divider/>
               <Text strong={true}>Veichle ID: </Text>
-              <Text type="secondary">{order.vehicle_id}</Text>
-              <VehicleDetailInfoButton vehicle={order.vehicle} />
+              <Text type="secondary">{order.vehicleId.name}</Text>
+              <VehicleDetailInfoButton vehicle={order.vehicleId} />
               <Divider/></>
             }
           </Modal>
