@@ -1,4 +1,4 @@
-import { Form, Input, Button, message, Radio } from "antd";
+import { Form, Input, Button, message, Select } from "antd";
 import React from "react";
 import { addNewVehicle } from "../utils";
 
@@ -7,12 +7,15 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
+const { Option } = Select;
+
 class AddVehicle extends React.Component {
   state = {
     loading: false,
   };
 
   handleAddVehicle = async (values) => {
+    const {onAddSuccess} = this.props;
     const formData = new FormData();
     // add other data to dataForm
     formData.append("name", values.name);
@@ -25,8 +28,10 @@ class AddVehicle extends React.Component {
     });
 
     try {
-      await addNewVehicle(formData);
+      const newVehicle = await addNewVehicle(formData);
       message.success("Vehicle successfully added");
+      onAddSuccess(newVehicle);
+
     } catch (error) {
       message.error(error.message);
     } finally {
@@ -49,17 +54,17 @@ class AddVehicle extends React.Component {
           name="name"
           rules={[{ required: true }]}
         >
-          <Input />
+          <Input placeholder="Eneter Vehicle Name" style={{ width: 180 }} />
         </Form.Item>
         <Form.Item
           label="Vehicle Status"
           name="status"
           rules={[{ required: true }]}
         >
-          <Radio.Group>
-            <Radio.Button value="available">available</Radio.Button>
-            <Radio.Button value="unavailable">unavailable</Radio.Button>
-          </Radio.Group>
+          <Select defaultValue="Select Status" style={{ width: 180 }}>
+            <Option value="available">Available</Option>
+            <Option value="unavailable">Unavailable</Option>
+          </Select>
         </Form.Item>
         <Form.Item
           label="Vehicle Location"
@@ -68,23 +73,24 @@ class AddVehicle extends React.Component {
             { required: true, message: "Please select a dispatch center" },
           ]}
         >
-          <Radio.Group>
-            <Radio.Button value="1">Center 1</Radio.Button>
-            <Radio.Button value="2">Center 2</Radio.Button>
-            <Radio.Button value="3">Center 3</Radio.Button>
-          </Radio.Group>
+          <Select defaultValue="Select Center" style={{ width: 180 }}>
+            <Option value="1">Center 1</Option>
+            <Option value="2">Center 2</Option>
+            <Option value="3">Center 3</Option>
+          </Select>
         </Form.Item>
         <Form.Item
           label="Vehicle Type"
           name="vehicle_type"
           rules={[{ required: true }]}
         >
-          <Radio.Group>
-            <Radio.Button value="ROBOT_HEAVY">Robot_Heavy</Radio.Button>
-            <Radio.Button value="ROBOT_LIGHT">Robot_Light</Radio.Button>
-            <Radio.Button value="DRONE_HEAVY">Drone_Heavy</Radio.Button>
-            <Radio.Button value="DRONE_LIGHT">Drone_Light</Radio.Button>
-          </Radio.Group>
+          <Select defaultValue="Select Type" style={{ width: 180 }}>
+            <Option value="ROBOT_HEAVY">Robot_Heavy</Option>
+            <Option value="ROBOT_LIGHT">Robot_Light</Option>
+            <Option value="DRONE_HEAVY">Drone_Heavy</Option>
+            <Option value="DRONE_LIGHT">Drone_Light</Option>
+          </Select>
+
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button
@@ -92,6 +98,7 @@ class AddVehicle extends React.Component {
               background: "#fa5914",
               borderColor: "#fa5914",
               fontFamily: "Verdana",
+              width: 180,
             }}
             htmlType="submit"
             loading={this.state.loading}
