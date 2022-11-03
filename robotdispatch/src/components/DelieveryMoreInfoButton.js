@@ -43,38 +43,35 @@ class DelieveryMoreinfoButton extends React.Component {
         </Tooltip>
         {modalVisible && (
           <Modal
-            title={order.orderId}
+            title={order.order_id}
             centered={true}
             visible={true}
             closable={null}
             footer={null}
             onCancel={this.handleCancel}
           >
-              <Text strong={true}>Order Id: </Text>
-              <Text type="secondary">{order.orderId}</Text>
-              <Divider/>
-              <Text strong={true}>Order Prick Up Time: </Text>
-              <Text type="secondary">{order.expectPickupTime}</Text>
+              {<><Text strong={true}>Order Id: </Text><Text type="secondary">{order.order_id}</Text>
+            <Divider /><Text strong={true}>Order Prick Up Time: </Text>
+              <Text type="secondary">{order.expect_pickup_time}</Text>
               <Divider/>
               <Text strong={true}>Order Delievery Time: </Text>
-              <Text type="secondary">{order.expectDeliveryDate}</Text> 
+              <Text type="secondary">{order.expect_delivery_date}</Text> 
               <Divider/>
               <Text strong={true}>Shipment Item </Text>
-              <Divider/>
-              <Text type="secondary">Weight: {order.weight}</Text> 
-              <Divider/>
-              <Text type="secondary">Height: {order.height}</Text>
-              <Divider/>
-              <Text type="secondary">Length: {order.length}</Text>
-              <Divider/>
-              <Text type="secondary">Width: {order.width}</Text>
+              <ul/>
+              <li><Text type="secondary">Weight: {order.weight}</Text> </li>
+              <li><Text type="secondary">Height: {order.height}</Text></li>
+              <li> <Text type="secondary">Length: {order.length}</Text></li>
+              <li> <Text type="secondary">Width: {order.width}</Text> </li>
+              <ul/>
               <Divider/>
               <Text strong={true}>Guest Name: </Text>
-              <Text type="secondary">{order.guest.username}</Text>
+              <Text type="secondary">{order.guest.user_id}</Text>
               <Divider/>
               <Text strong={true}>Veichle ID: </Text>
-              <Text type="secondary">{order.vehicle.id}</Text>
-              <Divider/>
+              <Text type="secondary">{order.vehicle_id}</Text>
+              <Divider/></>
+            }
           </Modal>
         )}
       </React.Fragment>

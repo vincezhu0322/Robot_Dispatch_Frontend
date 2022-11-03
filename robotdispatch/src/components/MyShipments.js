@@ -63,12 +63,12 @@ class MyShipments extends React.Component {
                dataSource={this.state.data}
                renderItem={(item) => (
                <List.Item actions={[<CancelReservationButton 
-               onCancelSuccess={this.loadData} shipmentId={item.orderId} />, <DelieveryMoreinfoButton order={item} />]}>
+               onCancelSuccess={this.loadData} shipmentId={item.order_id} />, <DelieveryMoreinfoButton order={item} />]}>
                   <List.Item.Meta 
                      title={<text>{item.id}</text>}
                      description={
                         <>
-                           <Text>OrderId: {item.orderId}</Text>
+                           <Text>OrderId: {item.order_id}</Text>
                            
                         </>
                      }
