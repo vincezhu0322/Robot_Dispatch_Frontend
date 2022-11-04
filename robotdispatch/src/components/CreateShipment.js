@@ -7,28 +7,34 @@ import {
 } from 'antd';
 import React, { useState } from 'react';
 import AddressPage from './AddressPage';
+import AvailableVehicleList from './AvailableVehicleList';
+import { searchVehicle } from '../utils';
+
 const { Step } = Steps;
-const { TextArea } = Input;
-const steps = [
-  {
-    title: 'Address',
-    content: <AddressPage />,
-  },
-  {
-    title: 'Vehicle',
-    content: 'Vehicle Selection',
-  },
-  {
-    title: 'Estimation',
-    content: 'Left is image and info (vehicle type, weight, dimension, pickup time, address), Right is Map from backend',
-  },
-  {
-    title: 'Confirmation',
-    content: 'Similar to Estimation, (plus tracking number and id). Need more discussion with backend',
-  }
-];
+
+
 
 const CreateShipment = () => {
+
+  const steps = [
+    {
+      title: 'Delivery Information',
+      content: <AddressPage searchVehicleByFilter={searchVehicleByFilter}/>
+    },
+    {
+      title: 'Vehicle Selection',
+      content: <AvailableVehicleList AvailableVehicleList={this.state.availableVehicleList}/>
+    },
+    {
+      title: 'Estimation',
+      content: 'Left is image and info (vehicle type, weight, dimension, pickup time, address), Right is Map from backend',
+    },
+    {
+      title: 'Confirmation',
+      content: 'Similar to Estimation, (plus tracking number and id). Need more discussion with backend',
+    }
+  ];
+
   const [current, setCurrent] = useState(0);
   const next = () => {
     setCurrent(current + 1);
@@ -36,6 +42,37 @@ const CreateShipment = () => {
   const prev = () => {
     setCurrent(current - 1);
   };
+
+  const searchVehicleByFilter = async (values) => {
+    const formData = new FormData;
+    formData.append("pickup_address", "386 Higate Dr, Daly City");
+    formData.append("delivery_address", "1500 Sullivan Ave, Daly City");
+    formData.append("pickup_time", "00:00:00");
+    formData.append("delivery_time", "05:00:00");
+    // formData.append("pickup_address", values.pickup_address);
+    // formData.append("delivery_address", values.delivery_address);
+    // formData.append("pickup_time", values.pickup_time.format("hh:mm:ss"));
+    // formData.append("delivery_time", values.delivery_time.format("hh:mm:ss"));
+    formData.append("delivery_length", 5);
+    formData.append("delivery_width", 5);
+    formData.append("delivery_height", 5);
+    formData.append("delivery_weight", 5);
+  
+    try {
+      const resp = await searchVehicle(formData);
+      this.setState({
+        availableVehicleList: resp,
+      });
+      message.success("Found Available Vehicle");
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  }  
+
   return (
     <>
       <Steps current={current}>
@@ -71,4 +108,5 @@ const CreateShipment = () => {
   );
 };
 
-export {CreateShipment};
+
+export { CreateShipment };
