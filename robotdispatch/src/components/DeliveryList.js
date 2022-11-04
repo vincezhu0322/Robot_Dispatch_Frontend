@@ -33,20 +33,24 @@ class DeliveryList extends React.Component {
         renderItem={(item) => (
           <List.Item>
             <Card
-              key={item.id}
+              key={item.order_id}
               title={
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <Text ellipsis={true} style={{ maxWidth: 150 }}>
-                    Delivery: {item.name}
+                  <Text ellipsis={true} style={{ maxWidth: 150, fontSize: 15, fontWeight: 600, color: "purple" }}>
+                    Delivery: {item.order_id}
                   </Text>
-                  <DeliveryDetailInfoButton delivery={item} />
                 </div>
               }
-              extra={[<RemoveDeliveryButton delivery={item} />]}
+              extra={[<DeliveryDetailInfoButton delivery={item} />, ' ', <RemoveDeliveryButton delivery={item} />]}
             >
-              <Text>ID: {item.id}</Text>
+              <Text strong={true}>Item type</Text>
+              <Text>: {item.description}</Text>
               <Divider />
-              <Text>Status: {item.status}</Text>
+              <Text strong={true}>Order Date</Text>
+              <Text>: {item.order_date}</Text>
+              <Divider />
+              <Text strong={true}>Arrive Date</Text>
+              <Text>: {item.expect_delivery_date}</Text>
             </Card>
           </List.Item>
         )}
@@ -69,7 +73,7 @@ class RemoveDeliveryButton extends React.Component {
     });
 
     try {
-      await deleteDelivery(delivery.id);
+      await deleteDelivery(delivery.order_id);
       message.success("Delivery successfully deleted!");
     } catch (error) {
       message.error(error.message);
