@@ -17,6 +17,7 @@ import {
 import Text from "antd/lib/typography/Text";
 import VehicleDetailInfoButton from './VehicleDetailInfoButton';
 import { searchVehicleByFilter } from './CreateShipment';
+import { searchVehicle } from '../utils';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -31,18 +32,38 @@ const style = {
 
 class AddressPage extends React.Component {
     state = {
-        data: [],
-        loading: false,
+        data: this.props.data,
     };
 
+    handleOnFinish = async(values) => {
+      const dataForm = new FormData();
+      dataForm.append("test",1);
+      dataForm.append("pickup_address", values.pickup_address);
+      dataForm.append("delivery_address", values.delivery_address);
+      dataForm.append("pickup_time", values.pickup_time.format("hh:mm:ss"));
+      dataForm.append("delivery_time", values.delivery_time.format("hh:mm:ss"));
+      dataForm.append("delivery_length", 5);
+      dataForm.append("delivery_width", 5);
+      dataForm.append("delivery_height", 5);
+      dataForm.append("delivery_weight", 5);
+      this.props.setData(dataForm);
+      try {
+        const resp = await searchVehicle(dataForm);
+        this.props.setVehicleList(resp);
+        message.success("Found Available Vehicle");
+      } catch (error) {
+        message.error(error.message);
+      } finally {
+        this.setState({
+          loading: false,
+        });
+      }
+    }
     render() {
-        const { searchVehicleByFilter } = this.props;
-        console.log(this.props);
-
         return (
             <>
                 <Form 
-                    onFinish={ searchVehicleByFilter }
+                    onFinish={ this.handleOnFinish }
                     style={style}
                     labelCol={{ span: 3 }}
                     wrapperCol={{ span: 16 }}

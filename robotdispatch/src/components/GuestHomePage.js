@@ -4,7 +4,7 @@ import {
   Typography,
   Input
 } from "antd";
-import { CreateShipment } from "./CreateShipment";
+import { CreateShipmentClass } from "./CreatShipmentClass";
 import { MyShipments } from "./MyShipments";
  
 const { TabPane } = Tabs;
@@ -19,7 +19,7 @@ class GuestHomePage extends React.Component {
         return (
          <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
          <TabPane tab="CreateShipment" key="1">
-           <CreateShipment/>
+           <CreateShipmentClass/>
          </TabPane>
          <TabPane tab="My Reservations" key="2">
            <MyShipments />
