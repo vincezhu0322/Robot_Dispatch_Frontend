@@ -16,7 +16,7 @@ import {
 } from 'antd';
 import Text from "antd/lib/typography/Text";
 import VehicleDetailInfoButton from './VehicleDetailInfoButton';
-import { searchVehicle, searchVehicleByFilter, searchVehicleByWeight } from '../utils';
+import { searchVehicleByFilter } from './CreateShipment';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -35,133 +35,14 @@ class AddressPage extends React.Component {
         loading: false,
     };
 
-    handleSearchVehicle = async (values) => {
-        const formData = new FormData();
-        // add other data to dataForm
-        // formData.append("pickup_address", values.pickup_address);
-        // formData.append("delivery_address", values.delivery_address);
-        // formData.append("pickup_time", values.pickup_time);
-        // formData.append("delivery_time", values.delivery_time);
-        // formData.append("delivery_length", values.delivery_length);
-        // formData.append("delivery_width", values.delivery_width);
-        // formData.append("delivery_height", values.delivery_height);
-        // formData.append("delivery_weight", values.delivery_weight);
-        const deliverylength = Number.parseInt(values.delivery_length);
-
-        formData.append("pickup_address", values.pickup_address);
-        formData.append("delivery_address", values.delivery_address);
-        formData.append("pickup_time", values.pickup_time.format("hh:mm:ss"));
-        formData.append("delivery_time", values.delivery_time.format("hh:mm:ss"));
-        formData.append("delivery_length", values.delivery_length);
-        formData.append("delivery_width", 5);
-        formData.append("delivery_height", 5);
-        formData.append("delivery_weight", 5);
-        console.log(formData);
-    
-        this.setState({
-          loading: true,
-        });
-    
-        try {
-          const resp = await searchVehicle(formData);
-          this.setState({
-            data: resp,
-          });
-          message.success("Found Available Vehicle");
-        } catch (error) {
-          message.error(error.message);
-        } finally {
-          this.setState({
-            loading: false,
-          });
-        }
-      };
-
-    search = async (values) => {
-        this.setState({
-            loading: false,
-        });
-
-        const {
-            pickup_address,
-            delivery_address,
-            pickup_time,
-            delivery_time,
-            delivery_length, 
-            delivery_width,
-            delivery_height,
-            delivery_weight,
-        } = values;
-
-        try {
-            const resp = await searchVehicleByFilter(
-                pickup_address,
-                delivery_address,
-                pickup_time,
-                delivery_time,
-                delivery_length, 
-                delivery_width,
-                delivery_height,
-                delivery_weight,
-            );
-            this.setState({
-                data: resp,
-            });
-            message.success("search success");
-        } catch (error) {
-            message.error(error.message);
-        } finally {
-            this.setState({
-                loading: false,
-            });
-        }
-    };
-
-    // search = async (query) => {
-    //     this.setState({
-    //         loading: true,
-    //     });
-
-    //     try {
-    //         const resp = await searchVehicleByDate(query);
-    //         this.setState({
-    //             data: resp,
-    //         });
-    //     } catch (error) {
-    //         message.error(error.message);
-    //     } finally {
-    //         this.setState({
-    //             loading: false,
-    //         });
-    //     }
-    // }
-
-    searchByWeight = async (values) => {
-        this.setState({
-          loading: false,
-        });
-        const delivery_weight = values.delivery_weight;
-        try {
-          const resp = await searchVehicleByWeight(delivery_weight);
-          this.setState({
-            data: resp,
-          });
-          message.success("search success");
-        } catch (error) {
-          message.error(error.message);
-        } finally {
-          this.setState({
-            loading: false,
-          });
-        }
-      };
-
     render() {
+        const { searchVehicleByFilter } = this.props;
+        console.log(this.props);
+
         return (
             <>
-
                 <Form 
-                    onFinish={this.handleSearchVehicle}
+                    onFinish={ searchVehicleByFilter }
                     style={style}
                     labelCol={{ span: 3 }}
                     wrapperCol={{ span: 16 }}
@@ -216,7 +97,7 @@ class AddressPage extends React.Component {
                 </Form>
              
 
-                <List 
+                {/* <List 
                     style={{ marginTop: 20 }} 
                     loading={this.state.loading}
                     grid={{
@@ -248,7 +129,7 @@ class AddressPage extends React.Component {
                             </Card>
                         </List.Item>
                     )}
-                />
+                /> */}
             </>
           );
     }
