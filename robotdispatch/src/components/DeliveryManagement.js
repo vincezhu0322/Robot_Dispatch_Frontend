@@ -2,12 +2,7 @@ import React from "react";
 import { Row, Col, Divider, message } from "antd";
 import SearchDelivery from "./SearchDelivery";
 import DeliveryList from "./DeliveryList";
-import { getDelivery } from "../utils";
-
-/**
- * @todo 与后端API和数据库统一, 需要后端暴露相应接口. 
- * 涉及：SearchDelivery(getDelivery), RemoveDeliveryButton(deleteDelivery), DeliveryDetailInfoButton
- */
+import { getDelivery, getDeliveryByOrderDate, getDeliveryByOrderId } from "../utils";
 
 class DeliveryManagement extends React.Component {
   state = {
@@ -15,18 +10,41 @@ class DeliveryManagement extends React.Component {
     isLoadingList: false,
   };
 
-  search = async (values) => {
+  searchById = async (values) => {
     this.setState({
       loading: true,
-      searchFunc: this.search,
+      searchFunc: this.searchById,
     });
-    const {fo, start_date, end_date} = values;
+    const {order_id} = values;
     try {
-      const resp = await getDelivery(fo, start_date, end_date);
+      const resp = await getDeliveryByOrderId(order_id);
       this.setState({
         deliveryList: resp,
       });
       message.success("search success");
+      console.log(resp);
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  };
+
+  searchByDate = async (values) => {
+    this.setState({
+      loading: true,
+      searchFunc: this.searchByDate,
+    });
+    const {start_date, end_date} = values;
+    try {
+      const resp = await getDeliveryByOrderDate(start_date, end_date);
+      this.setState({
+        deliveryList: resp,
+      });
+      message.success("search success");
+      console.log(resp);
     } catch (error) {
       message.error(error.message);
     } finally {
@@ -41,7 +59,7 @@ class DeliveryManagement extends React.Component {
       <Row>
         <Divider orientation="right" plain></Divider>
         <Col span={6}>
-            <SearchDelivery search={this.search}/>
+            <SearchDelivery searchById={this.searchById} searchByDate={this.searchByDate}/>
         </Col>
         <Col span={18}>
             <DeliveryList deliveryList={this.state.deliveryList}/>
