@@ -3,6 +3,7 @@ import { InfoOutlined } from "@ant-design/icons";
 import Text from "antd/lib/typography/Text";
 import { Button, Tooltip, Modal, Divider } from "antd";
 import VehicleDetailInfoButton from "./VehicleDetailInfoButton";
+import MapShowButton from "./MapShowButton";
 class DelieveryMoreinfoButton extends React.Component {
   state = {
     modalVisible: false,
@@ -71,6 +72,7 @@ class DelieveryMoreinfoButton extends React.Component {
               <Text strong={true}>Veichle ID: </Text>
               <Text type="secondary">{order.vehicleId.name}</Text>
               <VehicleDetailInfoButton vehicle={order.vehicleId} />
+              <MapShowButton order = {order}/>
               <Divider/></>
             }
           </Modal>

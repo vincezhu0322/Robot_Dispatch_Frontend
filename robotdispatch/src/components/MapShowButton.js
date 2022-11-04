@@ -2,7 +2,7 @@ import React from "react";
 import { InfoOutlined } from "@ant-design/icons";
 import Text from "antd/lib/typography/Text";
 import { Button, Tooltip, Modal, Divider } from "antd";
-
+import { GoogleMap } from "./Map";
 class MapShowButton extends React.Component {
   state = {
     modalVisible: false,
@@ -21,7 +21,7 @@ class MapShowButton extends React.Component {
   };
 
   render() {
-    const { vehicle } = this.props;
+    const { order } = this.props;
     const { modalVisible } = this.state;
 
     return (
@@ -43,18 +43,18 @@ class MapShowButton extends React.Component {
         </Tooltip>
         {modalVisible && (
           <Modal
-            title={vehicle.name}
+            title={order.id}
             centered={true}
             visible={true}
             closable={null}
             footer={null}
             onCancel={this.handleCancel}
           >
-             
+             <GoogleMap/>
           </Modal>
         )}
       </React.Fragment>
     );
   }
 }
-export default VehicleDetailInfoButton;
+export default MapShowButton;

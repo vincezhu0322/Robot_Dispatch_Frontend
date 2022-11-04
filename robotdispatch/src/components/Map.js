@@ -71,10 +71,10 @@ class GoogleMap extends React.Component {
   render() {
     return (
       <div>
-        <div id="map" style={{ width: 300, height: 300 }}></div>
+        <div id="map" style={{ width: 475, height: 300 }}></div>
       </div>
     );
   }
 }
 
-export default GoogleMap;
+export {GoogleMap};
