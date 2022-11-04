@@ -245,10 +245,9 @@ export const deleteVehicle = (vehicleId) => {
   });
 };
 
-export const getDelivery = (fo, start_date, end_date) => {
+export const getDeliveryByOrderId = (order_id) => {
   const authToken = localStorage.getItem("authToken");
-  const getDeliveryUrl = `${domain}/deliveries/${fo}_${start_date}_${end_date}`;
-
+  const getDeliveryUrl = `${domain}/deliveries_admin/${order_id}`;
   return fetch(getDeliveryUrl, {
     headers: {
       Authorization: `Bearer ${authToken}`,
@@ -261,9 +260,24 @@ export const getDelivery = (fo, start_date, end_date) => {
   });
 };
 
-export const deleteDelivery = (deliveryId) => {
+export const getDeliveryByOrderDate = (start_date, end_date) => {
   const authToken = localStorage.getItem("authToken");
-  const deleteDeliveryUrl = `${domain}/deliveries/${deliveryId}`;
+  const getDeliveryUrl = `${domain}/deliveries`;
+  return fetch(getDeliveryUrl, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("Fail to search delivery");
+    }
+    return response.json();
+  });
+};
+
+export const deleteDelivery = (order_id) => {
+  const authToken = localStorage.getItem("authToken");
+  const deleteDeliveryUrl = `${domain}/deliveries/${order_id}`;
 
   return fetch(deleteDeliveryUrl, {
     method: "DELETE",
