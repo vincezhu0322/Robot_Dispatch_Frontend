@@ -276,3 +276,81 @@ export const deleteDelivery = (deliveryId) => {
     }
   });
 };
+
+export const searchVehicleByWeight = (delivery_weight) => {
+  const authToken = localStorage.getItem("authToken");
+  const searchVehicleByDateUrl = `${domain}/available_vehicles/${delivery_weight}`;
+
+  return fetch(searchVehicleByDateUrl, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("No Available Vehicle");
+    }
+    return response.json();
+  });
+}
+
+export const searchVehicle = (data) => {
+  const authToken = localStorage.getItem("authToken");
+  const searchVehicleUrl = `${domain}/available_vehicles`;
+
+  return fetch(searchVehicleUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: data,
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("No Available Vehicle");
+    }
+    return response.json();
+  });
+};
+
+export const searchVehicleByFilter = ( 
+  pickup_address,
+  delivery_address,
+  pickup_time,
+  delivery_time,
+  delivery_length, 
+  delivery_width,
+  delivery_height,
+  delivery_weight,  
+) => {
+  const authToken = localStorage.getItem("authToken");
+  const searchVehicleUrl = `${domain}/available_vehicles/${pickup_address}_${delivery_address}}_${pickup_time}_${delivery_time}_${delivery_length}_${delivery_width}_${delivery_height}_${delivery_weight}`;
+  return fetch(searchVehicleUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+    
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("No Available Vehicle");
+    }
+    return response.json();
+  });
+};
+
+export const addOrder = (data) => {
+  const authToken = localStorage.getItem("authToken");
+  const addOrderUrl = `${domain}/orders`;
+
+  return fetch(addOrderUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": "application/json",
+    },
+    body: data,
+  }) .then ((response) => {
+    if(response.status !== 200) {
+      throw Error("Fail to Create Shipment");
+    }
+  });
+}
