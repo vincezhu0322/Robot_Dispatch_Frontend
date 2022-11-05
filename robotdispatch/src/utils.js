@@ -351,20 +351,39 @@ export const searchVehicleByFilter = (
   });
 };
 
-export const addOrder = (data) => {
+export const addDeliveryOrder = (data) => {
   const authToken = localStorage.getItem("authToken");
-  const addOrderUrl = `${domain}/orders`;
-
+  const addOrderUrl = `${domain}/deliveries`;
+  console.log(data.get("vehicle_id"));
+  console.log(data.get("center_id"));
   return fetch(addOrderUrl, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${authToken}`,
-      "Content-Type": "application/json",
+      //"Content-Type": "application/json",
     },
     body: data,
   }) .then ((response) => {
     if(response.status !== 200) {
-      throw Error("Fail to Create Shipment");
+      throw Error("Fail to Create Order");
     }
+    return response.statusText;
+  });
+}
+
+
+export const estimateDeliveryTime = (data) => {
+  const authToken = localStorage.getItem("authToken");
+  const searchVehicleByDateUrl = `${domain}/estimate_time/${data.get("expect_pickup_time")}_${data.get("pickup_address")}_${data.get("deliver_address")}_${data.get("vehicle_id")}`;
+
+  return fetch(searchVehicleByDateUrl, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }).then((response) => {
+    if (response.status !== 200) {
+      throw Error("No Estimate Time");
+    }
+    return response.json();
   });
 }

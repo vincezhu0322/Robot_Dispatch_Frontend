@@ -9,7 +9,8 @@ import React, { useState, useEffect } from 'react';
 import AddressPage from './AddressPage';
 import AvailableVehicleList from './AvailableVehicleList';
 import { searchVehicle } from '../utils';
-
+import { EstimateTimePage } from './EstimateTimePage';
+import { ConfirmationPage } from './ConfirmationPage';
 const { Step } = Steps;
 
 
@@ -30,11 +31,11 @@ const CreateShipment = (a) => {
     },
     {
       title: 'Estimation',
-      content: 'Left is image and info (vehicle type, weight, dimension, pickup time, address), Right is Map from backend',
+      content: <EstimateTimePage orderData = {data} setData = {setData}/>
     },
     {
       title: 'Confirmation',
-      content: 'Similar to Estimation, (plus tracking number and id). Need more discussion with backend',
+      content: <ConfirmationPage orderData = {data} setData = {setData}/>
     }
   ];
 
@@ -53,10 +54,7 @@ const CreateShipment = (a) => {
     
   }
 
-  useEffect(() => {
-    // Update the document title using the browser API
-    console.log(data.get("test"));
-  });
+
 
   return (
     <>

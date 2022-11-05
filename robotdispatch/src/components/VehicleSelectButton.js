@@ -26,9 +26,8 @@ class VehicleSelectButton extends React.Component {
         const data = this.props.data;
         const dataForm = data;
         dataForm.set("vehicle_id", vehicle.id);
-        dataForm.set("center_id", vehicle.center_id);
+        dataForm.set("center_id", 1);
         this.props.setData(dataForm);
-        console.log(this.props.data.get("vehicle_id"));
         this.setState({
             loading: true,
         });

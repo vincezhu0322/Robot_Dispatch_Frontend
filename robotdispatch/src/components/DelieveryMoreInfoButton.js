@@ -52,11 +52,16 @@ class DelieveryMoreinfoButton extends React.Component {
             onCancel={this.handleCancel}
           >
               {<><Text strong={true}>Order Id: </Text><Text type="secondary">{order.order_id}</Text>
-            <Divider /><Text strong={true}>Order Prick Up Time: </Text>
-              <Text type="secondary">{order.expect_pickup_time}</Text>
+            <Divider />
+            <p><Text strong={true}>Order Prick Up Time: </Text>
+              <Text type="secondary">{order.expect_pickup_time}</Text></p>
+              <Text strong={true}>Pick Up Address: </Text>
+              <Text type="secondary">{order.pickup_address}</Text> 
               <Divider/>
-              <Text strong={true}>Order Delievery Time: </Text>
-              <Text type="secondary">{order.expect_delivery_date}</Text> 
+              <p><Text strong={true}>Order Delievery Time: </Text>
+              <Text type="secondary">{order.expect_delivery_date}</Text> </p>
+              <Text strong={true}>Delievery Address: </Text>
+              <Text type="secondary">{order.deliver_address}</Text> 
               <Divider/>
               <Text strong={true}>Shipment Item </Text>
               <ul/>
@@ -67,7 +72,7 @@ class DelieveryMoreinfoButton extends React.Component {
               <ul/>
               <Divider/>
               <Text strong={true}>Guest Name: </Text>
-              <Text type="secondary">{order.guest.Id}</Text>
+              <Text type="secondary">{order.guest.username}</Text>
               <Divider/>
               <Text strong={true}>Veichle ID: </Text>
               <Text type="secondary">{order.vehicleId.name}</Text>

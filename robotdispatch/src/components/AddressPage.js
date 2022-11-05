@@ -37,14 +37,16 @@ class AddressPage extends React.Component {
 
     handleOnFinish = async(values) => {
       const dataForm = new FormData();
-      dataForm.append("test",1);
+      dataForm.append("pickup_name", values.pickup_name);
+      dataForm.append("delivery_name", values.delivery_name);
       dataForm.append("pickup_address", values.pickup_address);
       dataForm.append("delivery_address", values.delivery_address);
       dataForm.append("deliver_address", values.delivery_address);
       dataForm.append("pickup_zipcode", 94015);
       dataForm.append("deliver_zipcode", 94015);
-      dataForm.append("pickup_time", values.pickup_time.format("hh:mm:ss"));
       dataForm.append("expect_pickup_time", values.pickup_time.format("hh:mm:ss"));
+      dataForm.append("pickup_time", values.pickup_time.format("hh:mm:ss"));
+      dataForm.append("expect_pickup_date", values.pickup_date.format("YYYY-MM-DD"));
       dataForm.append("delivery_time", values.delivery_time.format("hh:mm:ss"));
       dataForm.append("expect_delivery_date", values.delivery_date.format("YYYY-MM-DD"));
       dataForm.append("delivery_length", 6);

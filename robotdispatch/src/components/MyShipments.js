@@ -68,8 +68,8 @@ class MyShipments extends React.Component {
                      title={<text>{item.id}</text>}
                      description={
                         <>
-                           <Text>OrderId: {item.order_id}</Text>
-                           
+                           <Text>OrderId: {item.order_id} </Text>
+                           {console.log(item.guest.username)}
                         </>
                      }
                   />
