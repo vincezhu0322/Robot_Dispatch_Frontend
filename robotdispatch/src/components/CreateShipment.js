@@ -26,7 +26,7 @@ const CreateShipment = (a) => {
     {
       title: 'Vehicle Selection',
       //content: <AvailableVehicleList/>
-      content: <AvailableVehicleList AvailableVehicleList = {vehicleList}/>
+      content: <AvailableVehicleList AvailableVehicleList = {vehicleList} data = {data} setData = {setData}/>
     },
     {
       title: 'Estimation',
