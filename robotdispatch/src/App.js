@@ -5,7 +5,7 @@ import LoginPage from "./components/LoginPage";
 import AdminHomePage from "./components/AdminHomePage";
 import GuestHomePage from "./components/GuestHomePage";
 import { HomePage } from "./components/HomePage";
-
+import "./App.css";
  
 const { Header, Content } = Layout;
  

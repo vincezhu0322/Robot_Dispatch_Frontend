@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Space } from "antd";
 import { AlignCenterOutlined } from "@ant-design/icons"; 
-
+import "./style.css";
 class HomePage extends React.Component {
   state = {
     loading: false,
@@ -22,18 +22,18 @@ class HomePage extends React.Component {
   render() {
     return (
       <>
-      <div display = "flex" style={{ width: 340, margin: "60px auto" , alignItems : "center",}}>
+      <div className="HomePage" >
         <img
           src="https://i.postimg.cc/pdJpWRnV/1641667682965-pic.jpg"
           width="600"
-          height="600"
+          height="490.863"
         />
 
-        <p align="center" > Easy | Quick | Conveninent | Automatic</p>
+        <h1> Easy | Quick | Convenient | Automatic</h1>
         <Space
           style={{
             position: "relative",
-            left: "-13%",
+            
           }}
         >
           <Button
