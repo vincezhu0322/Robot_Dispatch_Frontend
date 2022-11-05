@@ -1,7 +1,8 @@
 import React from "react";
 import Text from "antd/lib/typography/Text";
-import { Divider, List, Card } from "antd";
+import { Divider, List, Card, Button } from "antd";
 import VehicleDetailInfoButton from "./VehicleDetailInfoButton";
+import VehicleSelectButton from "./VehicleSelectButton";
 
 class AvailableVehicleList extends React.Component {
     state = {
@@ -34,13 +35,13 @@ class AvailableVehicleList extends React.Component {
                         key={item.id}
                         title={
                             <div style={{ display: "flex", alignItems: "center" }}>
-                            <Text ellipsis={true} style={{ maxWidth: 150 }}>
-                                Vehicle: {item.name}
+                            <Text ellipsis={true} style={{ maxWidth: 200 }}>
+                                {item.name}
                             </Text>
                             <VehicleDetailInfoButton vehicle={item} />
                             </div>
                         }
-                        // extra={[<RemoveVehicleButton vehicle={item} />]}
+                        extra={[<VehicleSelectButton vehicle={item} data = {this.props.data} setData = {this.props.setData}/>]}
                         >
                         <Text>ID: {item.id}</Text>
                         <Divider />
