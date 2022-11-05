@@ -5,7 +5,7 @@ import React from "react";
 class GoogleMap extends React.Component {
   constructor() {
     super();
-    this.state = { lat: 37.77, lng: -122.447 };
+    this.state = { lat: 37.776463, lng: -122.417213 };
   }
   // state = { setting: { lat: 37.77, lng: -122.447 } }
   // state = { lat: 37.77, lng: -122.447 };
@@ -58,7 +58,7 @@ class GoogleMap extends React.Component {
       directionsService
         .route({
           origin: this.state, // Haight.
-          destination: { lat: 37.768, lng: -122.511 }, // Ocean Beach.
+          destination: { lat: 37.422259, lng: -122.08407 }, // Ocean Beach.
           travelMode: google.maps.TravelMode.DRIVING,
         })
         .then((response) => {

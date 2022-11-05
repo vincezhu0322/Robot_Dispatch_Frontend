@@ -18,10 +18,10 @@ class GuestHomePage extends React.Component {
   render() {
         return (
          <Tabs defaultActiveKey="1" destroyInactiveTabPane={true}>
-         <TabPane tab="CreateShipment" key="1">
+         <TabPane tab="Create Shipment" key="1">
            <CreateShipmentClass/>
          </TabPane>
-         <TabPane tab="My Reservations" key="2">
+         <TabPane tab="My Shipments" key="2">
            <MyShipments />
          </TabPane>
        </Tabs>

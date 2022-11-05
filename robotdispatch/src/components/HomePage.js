@@ -1,52 +1,59 @@
 import React from "react";
 import { Button, Space } from "antd";
-
-
+import { AlignCenterOutlined } from "@ant-design/icons"; 
 
 class HomePage extends React.Component {
-    state = {
-        loading: false,
-      };
-    constuctor() {
-        this.routeChange = this.routeChange.bind(this);
-      }
-    
-    handleClick=()=> {
-        this.setState({
-            loading: true,
-          });
-        this.props.handleToLogIn(); 
-        this.setState({
-            loading: false
-         });
-    }
+  state = {
+    loading: false,
+  };
+  constuctor() {
+    this.routeChange = this.routeChange.bind(this);
+  }
+
+  handleClick = () => {
+    this.setState({
+      loading: true,
+    });
+    this.props.handleToLogIn();
+    this.setState({
+      loading: false,
+    });
+  };
   render() {
     return (
-        <div style={{ width: 340, margin: "130px auto" }}> 
-          <p style={{fontSize:"200%",fontFamily:"Tahoma"}}>
-              Welcome to Dispatcher!</p>
-        <ul>
-        <li>Schedule pickups easily</li>
-        <li>Quickly find and track previous shipments</li>
-        <li>Create shipments online</li>
-        <li>Choose the robot you want!</li>
-        </ul>
+      <>
+      <div display = "flex" style={{ width: 340, margin: "60px auto" , alignItems : "center",}}>
+        <img
+          src="https://i.postimg.cc/pdJpWRnV/1641667682965-pic.jpg"
+          width="600"
+          height="600"
+        />
 
-              
-          <Space style={{
-                position: 'relative',
-                left: '-13%'}}> 
-            <Button style={{background: "#53078a", borderColor: "#purple",fontFamily:"Verdana"}}
-              onClick={this.handleClick}
-              disabled={this.state.loading}
-              //shape="round"
-              type="primary"
-            >
-              OPEN A FREE ACCOUNT/SIGN IN YOUR ACCOUNT
-            </Button>
-          </Space>
-        </div>
-      );
-     };
+        <p align="center" > Easy | Quick | Conveninent | Automatic</p>
+        <Space
+          style={{
+            position: "relative",
+            left: "-13%",
+          }}
+        >
+          <Button
+            style={{
+              background: "#53078a",
+              borderColor: "#purple",
+              fontFamily: "Verdana",
+              width:600
+            }}
+            onClick={this.handleClick}
+            disabled={this.state.loading}
+            //shape="round"
+            type="primary"
+          >
+            Free Registration/LogIn
+          </Button>
+        </Space>
+      </div>
+      </>
+    );
+  }
 }
-export{ HomePage };
+export { HomePage };

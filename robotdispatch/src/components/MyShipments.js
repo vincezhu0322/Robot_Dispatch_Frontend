@@ -11,8 +11,6 @@ import DelieveryMoreinfoButton from "./DelieveryMoreInfoButton";
 
 const { Text } = Typography;
 
-
-
 class MyShipments extends React.Component {
 
     state = {
@@ -63,7 +61,7 @@ class MyShipments extends React.Component {
                dataSource={this.state.data}
                renderItem={(item) => (
                <List.Item actions={[<CancelReservationButton 
-               onCancelSuccess={this.loadData} shipmentId={item.order_id} />, <DelieveryMoreinfoButton order={item} />]}>
+               onCancelSuccess={this.loadData} reservationId={item.order_id} />, <DelieveryMoreinfoButton order={item} />]}>
                   <List.Item.Meta 
                      title={<text>{item.id}</text>}
                      description={

@@ -54,7 +54,10 @@ const CreateShipment = (a) => {
     
   }
 
-
+  const intiazlie = () => {
+    setCurrent(0);
+    message.success('Processing complete!')
+  }
 
   return (
     <>
@@ -82,7 +85,7 @@ const CreateShipment = (a) => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
+          <Button type="primary" onClick={() => intiazlie()}>
             Ship
           </Button>
         )}

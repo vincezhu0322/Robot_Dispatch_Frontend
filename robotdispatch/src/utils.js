@@ -70,59 +70,6 @@ export const getStaysByHost = () => {
   });
 };
 
-export const searchStays = (query) => {
-  const authToken = localStorage.getItem("authToken");
-  const searchStaysUrl = new URL(`${domain}/search/`);
-  searchStaysUrl.searchParams.append("guest_number", query.guest_number);
-  searchStaysUrl.searchParams.append("lat", 37);
-  searchStaysUrl.searchParams.append("lon", -122);
-
-  return fetch(searchStaysUrl, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-  }).then((response) => {
-    if (response.status !== 200) {
-      throw Error("Fail to search stays");
-    }
-
-    return response.json();
-  });
-};
-
-export const deleteStay = (stayId) => {
-  const authToken = localStorage.getItem("authToken");
-  const deleteStayUrl = `${domain}/stays/${stayId}`;
-
-  return fetch(deleteStayUrl, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-  }).then((response) => {
-    if (response.status !== 200) {
-      throw Error("Fail to delete stay");
-    }
-  });
-};
-
-export const bookStay = (data) => {
-  const authToken = localStorage.getItem("authToken");
-  const bookStayUrl = `${domain}/reservations`;
-
-  return fetch(bookStayUrl, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then((response) => {
-    if (response.status !== 200) {
-      throw Error("Fail to book reservation");
-    }
-  });
-};
 
 export const cancelReservation = (shipmentId) => {
   const authToken = localStorage.getItem("authToken");
@@ -139,41 +86,6 @@ export const cancelReservation = (shipmentId) => {
     }
   });
 };
-
-export const getReservationsByStay = (stayId) => {
-  const authToken = localStorage.getItem("authToken");
-  const getReservationByStayUrl = `${domain}/stays/reservations/${stayId}`;
-
-  return fetch(getReservationByStayUrl, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-  }).then((response) => {
-    if (response.status !== 200) {
-      throw Error("Fail to get reservations by stay");
-    }
-
-    return response.json();
-  });
-};
-
-export const uploadStay = (data) => {
-  const authToken = localStorage.getItem("authToken");
-  const uploadStayUrl = `${domain}/stays`;
-
-  return fetch(uploadStayUrl, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-    body: data,
-  }).then((response) => {
-    if (response.status !== 200) {
-      throw Error("Fail to upload stay");
-    }
-  });
-};
-
 
 
 export const getVehicleById = (id) => {
@@ -245,6 +157,7 @@ export const deleteVehicle = (vehicleId) => {
   });
 };
 
+
 export const getDeliveryByOrderId = (order_id) => {
   const authToken = localStorage.getItem("authToken");
   const getDeliveryUrl = `${domain}/deliveries_admin/${order_id}`;
@@ -259,6 +172,7 @@ export const getDeliveryByOrderId = (order_id) => {
     return response.json();
   });
 };
+
 
 export const getDeliveryByOrderDate = (start_date, end_date) => {
   const authToken = localStorage.getItem("authToken");
@@ -275,6 +189,7 @@ export const getDeliveryByOrderDate = (start_date, end_date) => {
   });
 };
 
+
 export const deleteDelivery = (order_id) => {
   const authToken = localStorage.getItem("authToken");
   const deleteDeliveryUrl = `${domain}/deliveries/${order_id}`;
@@ -290,6 +205,7 @@ export const deleteDelivery = (order_id) => {
     }
   });
 };
+
 
 export const searchVehicleByWeight = (delivery_weight) => {
   const authToken = localStorage.getItem("authToken");
@@ -325,6 +241,7 @@ export const searchVehicle = (data) => {
   });
 };
 
+
 export const searchVehicleByFilter = ( 
   pickup_address,
   delivery_address,
@@ -351,11 +268,13 @@ export const searchVehicleByFilter = (
   });
 };
 
+
 export const addDeliveryOrder = (data) => {
   const authToken = localStorage.getItem("authToken");
   const addOrderUrl = `${domain}/deliveries`;
   console.log(data.get("vehicle_id"));
   console.log(data.get("center_id"));
+
   return fetch(addOrderUrl, {
     method: 'POST',
     headers: {
@@ -367,7 +286,8 @@ export const addDeliveryOrder = (data) => {
     if(response.status !== 200) {
       throw Error("Fail to Create Order");
     }
-    return response.statusText;
+    console.log(response);
+    return response.json();
   });
 }
 

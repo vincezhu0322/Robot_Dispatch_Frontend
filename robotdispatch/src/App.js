@@ -2,12 +2,9 @@ import { Layout, Dropdown, Menu, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import React from "react";
 import LoginPage from "./components/LoginPage";
-import { Footer } from "antd/lib/layout/layout";
 import AdminHomePage from "./components/AdminHomePage";
 import GuestHomePage from "./components/GuestHomePage";
 import { HomePage } from "./components/HomePage";
-
-
 
  
 const { Header, Content } = Layout;
@@ -19,6 +16,7 @@ class App extends React.Component {
     asHost: false,
   };
  
+
   componentDidMount() {
     const authToken = localStorage.getItem("authToken");
     const asHost = localStorage.getItem("asHost") === "true";
@@ -28,6 +26,7 @@ class App extends React.Component {
     });
   }
  
+
   handleLoginSuccess = (token, asHost) => {
     localStorage.setItem("authToken", token);
     localStorage.setItem("asHost", asHost);
@@ -37,6 +36,7 @@ class App extends React.Component {
     });
   };
  
+
   handleToLogIn = (token) => {
     localStorage.setItem("gotoLog", token);
     this.setState({
@@ -77,9 +77,9 @@ class App extends React.Component {
   render() {
     return (
       <Layout style={{ height: "100vh" }}>
-        <Header style={{ background: "#53078a",display: "flex", justifyContent: "space-between",height:"65px" }}>
-          <div style={{ fontSize: 22, fontWeight: 600, color: "white" }}>
-            Dispatcher
+        <Header style={{ background: "#53078a",display: "flex", justifyContent: "space-between",height:"100px" }}>
+          <div style={{ font:"Roboto Slab", fontSize: 30, fontWeight: 600, color: "white" }}>
+             <img src="https://i.postimg.cc/pLW2f7Gy/1851667684599-pic.jpg" width="350" height="98" />
           </div>
           {this.state.authed && (
             <div>

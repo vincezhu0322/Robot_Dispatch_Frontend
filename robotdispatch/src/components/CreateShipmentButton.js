@@ -1,6 +1,6 @@
-import { Form, Input, Button, message, Select } from "antd";
+import { Button, message, Select } from "antd";
 import React from "react";
-import { addNewVehicle, addDeliveryOrder } from "../utils";
+import {addDeliveryOrder } from "../utils";
 
 
 const layout = {
@@ -21,11 +21,11 @@ class CreateShipmentButton extends React.Component {
       loading: true,
     });
     try {  
-      const order_id = await addDeliveryOrder(data);
+      const response = await addDeliveryOrder(data);
       message.success("Order successfully added");
       const newdataForm = data;
-      console.log(order_id);
-      newdataForm.append("orderId", order_id);
+      console.log(response.TrackNo)
+      newdataForm.append("orderId", response.TrackNo);
       this.props.setData(newdataForm);
       
     } catch (error) {

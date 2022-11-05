@@ -3,6 +3,7 @@ import Text from "antd/lib/typography/Text";
 import { List, Card, Divider, message, Button } from "antd";
 import { DeleteOutlined} from '@ant-design/icons';
 import DeliveryDetailInfoButton from "./DeliveryDetailInfoButton";
+import DelieveryMoreinfoButton from "./DelieveryMoreInfoButton";
 import { deleteDelivery } from "../utils";
 
 class DeliveryList extends React.Component {
@@ -41,7 +42,7 @@ class DeliveryList extends React.Component {
                   </Text>
                 </div>
               }
-              extra={[<DeliveryDetailInfoButton delivery={item} />, ' ', <RemoveDeliveryButton delivery={item} />]}
+              extra={[<DelieveryMoreinfoButton order={item} />, ' ', <RemoveDeliveryButton delivery={item} />]}
             >
               <Text strong={true}>Item type</Text>
               <Text>: {item.description}</Text>

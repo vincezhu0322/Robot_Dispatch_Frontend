@@ -51,7 +51,7 @@ class EstimateTimePage extends React.Component {
             <p align = "left"><Text strong={true}> Delivery Date (expected): </Text>
             <Text type="secondary">{orderData.get("expect_delivery_date")}</Text></p>
             <p align = "left"><Text strong={true}> Delivery Time (expected): </Text>
-            <Text type="secondary">{orderData.get("delivery_time")}</Text></p>
+            <Text type="secondary" >{orderData.get("delivery_time")}</Text></p>
             </Card>
         </Space>
 

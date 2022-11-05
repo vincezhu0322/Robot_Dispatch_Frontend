@@ -18,6 +18,7 @@ class CancelReservationButton extends React.Component {
    
       try {
         await cancelReservation(reservationId);
+        message.success("Shipment successfully canceled")
       } catch (error) {
         message.error(error.message);
       } finally {
