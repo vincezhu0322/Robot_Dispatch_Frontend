@@ -40,12 +40,22 @@ class AddressPage extends React.Component {
       dataForm.append("test",1);
       dataForm.append("pickup_address", values.pickup_address);
       dataForm.append("delivery_address", values.delivery_address);
+      dataForm.append("deliver_address", values.delivery_address);
+      dataForm.append("pickup_zipcode", 94015);
+      dataForm.append("deliver_zipcode", 94015);
       dataForm.append("pickup_time", values.pickup_time.format("hh:mm:ss"));
+      dataForm.append("expect_pickup_time", values.pickup_time.format("hh:mm:ss"));
       dataForm.append("delivery_time", values.delivery_time.format("hh:mm:ss"));
-      dataForm.append("delivery_length", 5);
+      dataForm.append("expect_delivery_date", values.delivery_date.format("YYYY-MM-DD"));
+      dataForm.append("delivery_length", 6);
       dataForm.append("delivery_width", 5);
-      dataForm.append("delivery_height", 5);
-      dataForm.append("delivery_weight", 5);
+      dataForm.append("delivery_height", 3);
+      dataForm.append("delivery_weight", 8);
+      dataForm.append("length", 6.0);
+      dataForm.append("width", 5.0);
+      dataForm.append("height", 3.0);
+      dataForm.append("weight", 8.0);
+      dataForm.append("description", "Electrical Devices");
       this.props.setData(dataForm);
       try {
         const resp = await searchVehicle(dataForm);
@@ -76,6 +86,9 @@ class AddressPage extends React.Component {
                     <Form.Item label="Pick Up Address" name="pickup_address">
                         <Input />
                     </Form.Item>
+                    <Form.Item label="Pick Up ZIP" name="pickup_zipcode">
+                        <Input />
+                    </Form.Item>
                     <Form.Item label="Pick Up Date" name="pickup_date" >
                         <DatePicker />
                     </Form.Item>
@@ -88,6 +101,9 @@ class AddressPage extends React.Component {
                         <Input />
                     </Form.Item>
                     <Form.Item label="Delivery Address" name="delivery_address">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Delivery ZIP" name="delivery_zipcode">
                         <Input />
                     </Form.Item>
                     <Form.Item label="Delivery Date" name="delivery_date" >
