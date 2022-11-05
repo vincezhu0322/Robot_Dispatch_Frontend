@@ -25,7 +25,7 @@ class EstimateTimePage extends React.Component {
 
     <Space direction="horizental" size="middle" style={{ display: 'flex',}}>
         <Space direction="vertical" size="middle" style={{ display: 'flex',}}>
-            <Card title={"Pick up Info"} size="small">
+            <Card title={"Pick up Info"} size="mid" >
             <p align = "left"><Text strong={true}>Name: </Text>
             <Text type="secondary">{orderData.get("pickup_name")}</Text></p>
             <p align = "left"><Text strong={true}>Address: </Text>
@@ -33,7 +33,7 @@ class EstimateTimePage extends React.Component {
             <p align = "left"><Text strong={true}>Zipcode: </Text>
             <Text type="secondary">{orderData.get("pickup_zipcode")}</Text></p>
             </Card>
-            <Card title={"Delivery Info"} size="small">
+            <Card title={"Delivery Info"} size="mid">
             <p align = "left"><Text strong={true}>Name: </Text>
             <Text type="secondary">{orderData.get("delivery_name")}</Text></p>
             <p align = "left"><Text strong={true}>Address: </Text>
@@ -43,7 +43,7 @@ class EstimateTimePage extends React.Component {
             </Card>
         </Space>
         <Space direction="vertical" size="middle" style={{ display: 'flex',}}>
-        <Card title={"Time Info"} size="small">
+        <Card title={"Time Info"} size="mid">
             <p align = "left"><Text strong={true}>Pick Up Date: </Text>
             <Text type="secondary">{orderData.get("expect_pickup_date")}</Text></p>
             <p align = "left"><Text strong={true}> Pick Up Time: </Text>
@@ -56,7 +56,7 @@ class EstimateTimePage extends React.Component {
         </Space>
 
         <Space direction="vertical" size="middle" style={{ display: 'flex',}}>
-        <Card title={"Package Info"} size="small">
+        <Card title={"Package Info"} size="mid">
             <p align = "left"><Text strong={true}>Length: </Text>
             <Text type="secondary">{orderData.get("delivery_length")}</Text></p>
             <p align = "left"><Text strong={true}> Width: </Text>
@@ -68,7 +68,7 @@ class EstimateTimePage extends React.Component {
             <p align = "left"><Text strong={true}> Description: </Text>
             <Text type="secondary">{orderData.get("description")}</Text></p>
             </Card>
-        <Card title={"Vehicle Info"} size="small">
+        <Card title={"Vehicle Info"} size="mid">
             <p align = "left"><Text strong={true}>Vehicle Id: </Text>
             <Text type="secondary">{orderData.get("vehicle_id")}</Text></p>
             <p align = "left"><Text strong={true}> Location: </Text>
